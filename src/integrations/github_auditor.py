@@ -8,8 +8,9 @@ class GitHubAuditor:
         self.base_url = "https://api.github.com"
         self.headers = {
             "Accept": "application/vnd.github.v3+json",
-            "Authorization": f"Bearer {self.github_token}" if self.github_token else ""
         }
+        if self.github_token:
+            self.headers["Authorization"] = f"Bearer {self.github_token}"
 
     async def fetch_user_profile(self, username: str) -> Optional[Dict[str, Any]]:
         if not username:
